@@ -56,14 +56,9 @@ SELECT *
 
 
 --- јгрегатные ф-ции в столбцах
-SELECT AVG(TotalRam) AS 'Ram AVG'
-	FROM 
-		(
-			SELECT Sid, SUM(Sram) AS TotalRam
-			FROM dbSERVERS.dbo.S
-			GROUP BY Sid
-		)
-	AS TotS
+SELECT AVG(Sram) FROM dbo.S
+
+
 
 --- —кал€рные подзапросы в столбцах
 
@@ -112,7 +107,7 @@ SELECT Sid,
 	(
 		SELECT MAX(Sgraphics)
 		FROM dbSERVERS.dbo.S
-		WHERE Sgraphics <> 'GTX1080Ti'
+		WHERE Sgraphics = 'GTX1080Ti'
 	) AS GrCard
 INTO #BestServers2
 FROM dbSERVERS.dbo.S
@@ -126,10 +121,9 @@ SELECT * FROM #BestServers2
 SELECT *
 	FROM dbSERVERS.dbo.S P JOIN
 	(
-		SELECT TOP 5 Sid, SUM(Sram) AS SS
+		SELECT TOP 5 Sid
 		FROM dbSERVERS.dbo.S
 		Group BY Sid
-		ORDER BY SS DESC
 	) AS OD ON OD.Sid = P.Sid
 
 
@@ -158,25 +152,19 @@ WHERE Sid IN
 
 --- group by - having
 
-SELECT A.Sid,
-		A.Sram,
-		AVG(B.SS) AS AvgRam,
-		A.Sgraphics
-FROM dbSERVERS.dbo.S A JOIN
-	(
-		SELECT Sid, SUM(Sram) AS SS
-		FROM dbSERVERS.dbo.S
-		Group BY Sid
-	) B ON B.Sid = A.Sid
-GROUP BY A.Sid, A.Sram, A.Sgraphics
+
+SELECT Sgraphics,
+		AVG(Sram) as RamAvg
+		FROM dbo.S
+GROUP BY Sgraphics
 
 
 --- group by + having
 
 
-SELECT Sid, AVG(Sram) AS 'AvgRam'
+SELECT Sgraphics, AVG(Sram) AS 'AvgRam'
 FROM dbSERVERS.dbo.S A
-GROUP BY Sid
+GROUP BY Sgraphics
 HAVING AVG(Sram) >
 	(	
 		SELECT AVG(Sram) AS AvgR
@@ -251,9 +239,11 @@ AS
 	FROM dbSERVERS.dbo.S
 	WHERE Sgraphics = 'GTX1080Ti'
 )
-SELECT a AS 'allrtx'
+SELECT a AS 'all1080Ti'
 FROM CTE
 
+SELECT a AS 'f'
+FROM CTE
 
 --- Rec OTV
 
@@ -262,11 +252,11 @@ CREATE TABLE dbo.Example
 	SomeID smallint NOT NULL,
 	MoreID int NULL,
 	SomeNumber int
-	CONSTRAINT PK_SomeID PRIMARY KEY CLUSTERED (SomeID ASC)
+	CONSTRAINT PK_SomeID PRIMARY KEY (SomeID ASC)
 );
 GO
 
-INSERT dbo.Example VALUES(6,2,355);
+INSERT dbo.Example VALUES(4,3,355);
 GO
 
 WITH RecOTV(MoreID, SomeID, SomeNumber, Level)
@@ -275,6 +265,7 @@ AS
 	SELECT e.MoreID, e.SomeID, e.SomeNumber, 0 AS Level
 	FROM dbo.Example AS e
 	WHERE MoreID IS NULL
+	
 	UNION ALL
 
 	SELECT e.MoreID, e.SomeID, e.SomeNumber, Level + 1
@@ -290,9 +281,9 @@ FROM RecOTV;
 SELECT A.Sid,
 		A.Sram,
 		A.Sgraphics,
-		AVG(A.Sram) OVER(PARTITION BY A.Sid, A.Sgraphics) AS AvgRam,
-		MIN(A.Sram) OVER(PARTITION BY A.Sid, A.Sgraphics) AS MinRam,
-		MAX(A.Sram) OVER(PARTITION BY A.Sid, A.Sgraphics) AS MaxRam
+		AVG(A.Sram) OVER(PARTITION BY A.Sgraphics) AS AvgRam,
+		MIN(A.Sram) OVER(PARTITION BY A.Sgraphics) AS MinRam,
+		MAX(A.Sram) OVER(PARTITION BY A.Sgraphics) AS MaxRam
 FROM dbo.S A LEFT OUTER JOIN dbo.IPSU B ON B.Sid = A.Sid
 
 --- ROW_NUMBER
@@ -311,14 +302,19 @@ order by ID
 GO
 
 
-select *
+DELETE #tmp
+WHERE ID IN
+(
+	SELECT A.ID
 	from (
 		SELECT ID, Ramtemp, TempG, 
 		ROW_NUMBER() OVER
 			(	
-				PARTITION BY ID, Ramtemp, TempG
+				PARTITION BY Ramtemp, TempG
 				ORDER BY ID
 			) as uniqchk
 		FROM #tmp
 		) as A
-WHERE A.uniqchk = 1
+WHERE A.uniqchk <> 1
+
+)
