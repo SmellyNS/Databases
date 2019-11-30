@@ -1,19 +1,19 @@
 BULK INSERT [dbSERVERS].[dbo].[IP]
-FROM 'C:\Users\GTAO\Desktop\DataBases\Data\ip.txt'
+FROM 'C:\Users\GTAO\git\DataBases\dbSQL\Data\ip.txt'
 WITH (CODEPAGE = 'ACP', DATAFILETYPE = 'char', FIELDTERMINATOR = '\t', ROWTERMINATOR =
 '\n', CHECK_CONSTRAINTS);
 GO
 BULK INSERT [dbSERVERS].[dbo].[S]
-FROM 'C:\Users\GTAO\Desktop\DataBases\Data\servers.txt'
+FROM 'C:\Users\GTAO\git\DataBases\dbSQL\Data\servers.txt'
 WITH (CODEPAGE = 'ACP', DATAFILETYPE = 'char', FIELDTERMINATOR = '\t', ROWTERMINATOR =
 '\n', CHECK_CONSTRAINTS);
 GO
 BULK INSERT [dbSERVERS].[dbo].[U]
-FROM 'C:\Users\GTAO\Desktop\DataBases\Data\users.txt'
+FROM 'C:\Users\GTAO\git\DataBases\dbSQL\Data\users.txt'
 WITH (CODEPAGE = 'ACP', DATAFILETYPE = 'char', FIELDTERMINATOR = '\t', ROWTERMINATOR =
 '\n', CHECK_CONSTRAINTS);
 GO
 BULK INSERT [dbSERVERS].[dbo].[IPSU]
-FROM 'C:\Users\GTAO\Desktop\DataBases\Data\reg.txt'
+FROM 'C:\Users\GTAO\git\DataBases\dbSQL\Data\reg.txt'
 WITH (CODEPAGE = 'ACP', DATAFILETYPE = 'char', FIELDTERMINATOR = '\t', ROWTERMINATOR =
 '\n', CHECK_CONSTRAINTS);

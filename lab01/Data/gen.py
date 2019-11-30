@@ -1,6 +1,6 @@
 import random
 
-IPCount = 0
+
 
 with open('ip.txt','w') as f:
     templist = []
@@ -8,8 +8,7 @@ with open('ip.txt','w') as f:
         ip = '.'.join([str(random.randint(1,255)) for x in range(4)])
         templist.append(ip[:-1])
     templist = list(set(templist))
-    IPCount = len(templist)
-    for i in range(IPCount):
+    for i in range(len(templist)):
         f.write("%d\t%s\t1\n"%(i+1,templist[i]))
     
     
@@ -20,7 +19,7 @@ with open('servers.txt','w') as f:
         f.write("%d\t%d\t%s\n"%(i+1,random.choice([4,8,16,32]),random.choice(['GTX580','GTX590','GTX950','GTX960','GTX970','GTX980','GTX980Ti','GTX1080Ti'])))        
 
 
-UCount = 0
+
 
 with open('users.txt','w') as f:
     fnames = ['Александр', 'Алексей', 'Анатолий', 'Андрей', 'Антон', 'Аркадий', 'Артём', 'Артур', 'Борис', 'Вадим', 'Валентин', 'Валерий', 'Василий', 'Виктор', 'Виталий', 'Владимир', 'Владислав', 'Вячеслав', 'Георгий', 'Григорий', 'Денис', 'Дмитрий', 'Евгений', 'Егор', 'Иван', 'Игорь', 'Илья', 'Кирилл', 'Константин', 'Лев', 'Леонид', 'Максим', 'Марк', 'Михаил', 'Никита', 'Николай', 'Олег', 'Павел', 'Пётр', 'Роман', 'Руслан', 'Сергей', 'Тимур', 'Фёдор', 'Юрий', 'Ярослав']
@@ -29,17 +28,16 @@ with open('users.txt','w') as f:
     for i in range(1000):
         templist.append(random.choice(fnames)+' '+random.choice(snames))
     templist = list(set(templist))
-    UCount = len(templist)
-    for i in range(UCount):
+    for i in range(len(templist)):
         f.write("%d\t%s\n"%(i+1,templist[i]))
 
     
 
 with open('reg.txt','w') as f:
-    IPid = [i for i in range(IPCount)]
+    IPid = [i for i in range(3000)]
     scan = ['Mining','Gaming','Botnet','Cloud','Commercial','msgBot']
     for i in range(2000):
-        f.write("%d\t%d\t%d\t%s\n"%(IPid.pop(random.randint(0,len(IPid)-1))+1,random.randint(1,1000),random.randint(1,UCount),random.choice(scan)))
+        f.write("%d\t%d\t%d\t%s\n"%(IPid.pop(random.randint(0,len(IPid)-1))+1,random.randint(1,1000),random.randint(1,1000),random.choice(scan)))
 
     #user random
     #ip unique random
