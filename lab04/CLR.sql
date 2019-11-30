@@ -1,13 +1,17 @@
 -- CLR on
-
 EXEC sp_configure 'clr enabled', 1;  
 RECONFIGURE;  
 GO  
 
+EXEC sp_configure 'clr strict security', 0;  
+RECONFIGURE;  
+GO  
+
+alter database dbSERVERS set trustworthy ON;
 
 -- Scalar CLR
 
-CREATE ASSEMBLY scalar FROM 'C:\Users\GTAO\git\Databases\lab04\cs\scalar.dll';  
+CREATE ASSEMBLY scalar FROM 'C:\Users\Dmitry\git\Databases\lab04\cs\scalar.dll'
 GO  
 
 
@@ -27,7 +31,7 @@ drop assembly scalar
 -- Agr CLR
 
 
-CREATE ASSEMBLY Mult FROM 'C:\Users\GTAO\git\Databases\lab04\cs\Mult.dll';  
+CREATE ASSEMBLY Mult FROM 'C:\Users\Dmitry\git\Databases\lab04\cs\Mult.dll';  
 GO
 CREATE AGGREGATE Mult (@input int) RETURNS int 
 EXTERNAL NAME Mult.Mult;  
@@ -40,7 +44,7 @@ go
 
 -- Table CLR
 
-CREATE ASSEMBLY interval FROM 'C:\Users\GTAO\git\Databases\lab04\cs\table.dll';  
+CREATE ASSEMBLY interval FROM 'C:\Users\Dmitry\git\Databases\lab04\cs\table.dll';  
 GO
 
 create function dbo.interval(@a int)
@@ -58,7 +62,7 @@ drop assembly interval
 
 -- proc CLR
 
-CREATE ASSEMBLY sumramproc FROM 'C:\Users\GTAO\git\Databases\lab04\cs\proc.dll';  
+CREATE ASSEMBLY sumramproc FROM 'C:\Users\Dmitry\git\Databases\lab04\cs\proc.dll';  
 GO
 
 CREATE PROCEDURE RamSum (@sum int OUTPUT)  
@@ -73,7 +77,7 @@ select @rets
 -- trigger CLR
 
 
-CREATE ASSEMBLY sometrigger FROM 'C:\Users\GTAO\git\Databases\lab04\cs\trigger.dll';  
+CREATE ASSEMBLY sometrigger FROM 'C:\Users\Dmitry\git\Databases\lab04\cs\trigger.dll';  
 GO
 
 
@@ -94,7 +98,7 @@ drop assembly sometrigger
 
 -- type CLR
 
-CREATE ASSEMBLY point FROM 'C:\Users\GTAO\git\Databases\lab04\cs\type.dll';  
+CREATE ASSEMBLY point FROM 'C:\Users\Dmitry\git\Databases\lab04\cs\type.dll';  
 GO
 
 CREATE TYPE Point   

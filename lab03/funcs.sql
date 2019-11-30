@@ -222,3 +222,23 @@ select * from U where Uid = 1
 
 delete from U where Uid = 1
 
+
+
+
+-- Additional INSTEAD OF
+go
+
+create trigger Change on U after update as
+	begin
+		insert into History (Uid, Uname)
+		select Uid, 'Новый пользователь: ' + Uname
+		from inserted
+
+		insert into History (Uid, Uname)
+		select Uid, 'Удаленный пользователь: ' + Uname
+		from deleted
+	end
+
+
+UPDATE U SET Uname = 'mama mia' WHERE Uid = 1
+select * from History

@@ -30,8 +30,7 @@ public struct Point : INullable
             return pt;  
         }  
     }  
-  
-    // Use StringBuilder to provide string representation of UDT.  
+	
     public override string ToString()  
     {  
         // Since InvokeIfReceiverIsNull defaults to 'true'  
@@ -57,27 +56,22 @@ public struct Point : INullable
         if (s.IsNull)  
             return Null;  
   
-        // Parse input string to separate out points.  
         Point pt = new Point();  
         string[] xy = s.Value.Split(",".ToCharArray());  
         pt.X = Int32.Parse(xy[0]);  
         pt.Y = Int32.Parse(xy[1]);  
   
-        // Call ValidatePoint to enforce validation  
-        // for string conversions.  
         if (!pt.ValidatePoint())   
             throw new ArgumentException("Invalid XY coordinate values.");  
         return pt;  
     }  
   
-    // X and Y coordinates exposed as properties.  
     public Int32 X  
     {  
         get  
         {  
             return this._x;  
         }  
-        // Call ValidatePoint to ensure valid range of Point values.  
         set   
         {  
             Int32 temp = _x;  
@@ -108,10 +102,8 @@ public struct Point : INullable
         }  
     }  
   
-    // Validation method to enforce valid X and Y values.  
     private bool ValidatePoint()  
     {  
-        // Allow only zero or positive integers for X and Y coordinates.  
         if ((_x >= 0) && (_y >= 0))  
         {  
             return true;  
@@ -121,22 +113,19 @@ public struct Point : INullable
             return false;  
         }  
     }  
-  
-    // Distance from 0 to Point method.  
+   
     [SqlMethod(OnNullCall = false)]  
     public Double Distance()  
     {  
         return DistanceFromXY(0, 0);  
     }  
   
-    // Distance from Point to the specified point method.  
     [SqlMethod(OnNullCall = false)]  
     public Double DistanceFrom(Point pFrom)  
     {  
         return DistanceFromXY(pFrom.X, pFrom.Y);  
     }  
   
-    // Distance from Point to the specified x and y values method.  
     [SqlMethod(OnNullCall = false)]  
     public Double DistanceFromXY(Int32 iX, Int32 iY)  
     {  
