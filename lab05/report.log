@@ -1,0 +1,81 @@
+'date' is a required property
+
+Failed validating 'required' in schema['properties']['Something']['items']['properties']['secondparent']:
+    {'$id': '#/properties/Something/items/properties/secondparent',
+     'properties': {'date': {'$id': '#/properties/Something/items/properties/secondparent/properties/date',
+                             'default': '',
+                             'examples': ['2015-05-26T00:35:00'],
+                             'pattern': '^(.*)$',
+                             'title': 'The Date Schema',
+                             'type': 'string'},
+                    'hischild': {'$id': '#/properties/Something/items/properties/secondparent/properties/hischild',
+                                 'default': '',
+                                 'examples': ['Hello, my name is Adam'],
+                                 'pattern': '^(.*)$',
+                                 'title': 'The Hischild Schema',
+                                 'type': 'string'}},
+     'required': ['hischild', 'date'],
+     'title': 'The Secondparent Schema',
+     'type': 'object'}
+
+On instance['Something'][1]['secondparent']:
+    {'hischild': 'Goodby, Jeff'}'date' is a required property
+
+Failed validating 'required' in schema['properties']['Something']['items']['properties']['secondparent']:
+    {'properties': {'date': {'title': 'The Date Schema', 'type': 'string'},
+                    'hischild': {'title': 'The Hischild Schema',
+                                 'type': 'string'}},
+     'required': ['hischild', 'date'],
+     'title': 'The Secondparent Schema',
+     'type': 'object'}
+
+On instance['Something'][1]['secondparent']:
+    {'hischild': 'Goodby, Jeff'}'date' is a required property
+
+Failed validating 'required' in schema['properties']['Something']['items']['properties']['secondparent']:
+    {'$id': '#/properties/Something/items/properties/secondparent',
+     'properties': {'date': {'$id': '#/properties/Something/items/properties/secondparent/properties/date',
+                             'default': '',
+                             'examples': ['2015-05-26T00:35:00'],
+                             'pattern': '^(.*)$',
+                             'title': 'The Date Schema',
+                             'type': 'string'},
+                    'hischild': {'$id': '#/properties/Something/items/properties/secondparent/properties/hischild',
+                                 'default': '',
+                                 'examples': ['Hello, my name is Adam'],
+                                 'pattern': '^(.*)$',
+                                 'title': 'The Hischild Schema',
+                                 'type': 'string'}},
+     'required': ['hischild', 'date'],
+     'title': 'The Secondparent Schema',
+     'type': 'object'}
+
+On instance['Something'][1]['secondparent']:
+    {'hischild': 'Goodby, Jeff'}'date' is a required property
+
+Failed validating 'required' in schema['properties']['Something']['items']['properties']['secondparent']:
+    {'properties': {'date': {'title': 'The Date Schema', 'type': 'string'},
+                    'hischild': {'title': 'The Hischild Schema',
+                                 'type': 'string'}},
+     'required': ['hischild', 'date'],
+     'title': 'The Secondparent Schema',
+     'type': 'object'}
+
+On instance['Something'][1]['secondparent']:
+    {'hischild': 'Goodby, Jeff'}'' does not match '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+
+Failed validating 'pattern' in schema['properties']['Something']['items']['properties']['secondparent']['properties']['date']:
+    {'pattern': '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]',
+     'title': 'The Date Schema',
+     'type': 'string'}
+
+On instance['Something'][1]['secondparent']['date']:
+    '''' does not match '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+
+Failed validating 'pattern' in schema['properties']['Something']['items']['properties']['secondparent']['properties']['date']:
+    {'pattern': '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]',
+     'title': 'The Date Schema',
+     'type': 'string'}
+
+On instance['Something'][1]['secondparent']['date']:
+    ''

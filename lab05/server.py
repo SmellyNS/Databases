@@ -19,6 +19,16 @@ for schemafile in schemafiles:
                         with open("data.json") as data:
                                 data = json.loads(data.read())
                                 validate(data, json.loads(g.read()))
-                                print("SUCCESS")
+                                print("VALIDATION SUCCEED")
                 except jsonschema.exceptions.ValidationError as ve:
-                        print("FAULT")
+                        print("VALIDATION FAILED \n-----------------")
+                        retstr = ''
+                        for ch in str(ve):
+                                if ch == '\n':
+                                        break
+                                retstr += ch
+                        print(retstr)
+                        with open("report.log","a") as r:
+                                r.write(str(ve))
+                        print("Watch report.log")
+                        
