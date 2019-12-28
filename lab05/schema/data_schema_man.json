@@ -1,0 +1,59 @@
+ {
+   "type": "object",
+   "title": "The Root Schema",
+   "required": [
+     "Something"
+   ],
+   "properties": {
+     "Something": {
+       "type": "array",
+       "title": "The Something Schema",
+       "items": {
+         "type": "object",
+         "title": "The Items Schema",
+         "required": [
+           "firstparent",
+           "secondparent"
+         ],
+         "properties": {
+           "firstparent": {
+             "type": "object",
+             "title": "The Firstparent Schema",
+             "required": [
+               "hischild",
+               "date"
+             ],
+             "properties": {
+               "hischild": {
+                 "type": "string",
+                 "title": "The Hischild Schema"
+               },
+               "date": {
+                 "type": "string",
+                 "title": "The Date Schema"
+                 }
+             }
+           },
+           "secondparent": {
+             "type": "object",
+             "title": "The Secondparent Schema",
+             "required": [
+               "hischild",
+               "date"
+             ],
+             "properties": {
+               "hischild": {
+                 "type": "string",
+                 "title": "The Hischild Schema"
+                 },
+               "date": {
+                 "type": "string",
+                 "title": "The Date Schema"
+                 }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
