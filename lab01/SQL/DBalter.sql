@@ -30,5 +30,5 @@ GO
 ******/
 ALTER TABLE [dbo].[IP] ADD
 CONSTRAINT [Status_chk] CHECK ([Status] BETWEEN 0 AND 1),
-CONSTRAINT [IPaddress_chk] CHECK ([IPaddress] LIKE('[0-255].[0-255].[0-255].[0-255]'))
+CONSTRAINT [IPaddress_chk] CHECK ([IPaddress] LIKE('%.%.%.%'))
 GO
